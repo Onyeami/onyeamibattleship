@@ -80,13 +80,13 @@ def play_game(size, num_ships):
 
 # Main function to start the game
 def main():
-    size = int(input("Enter the grid size: "))
+    size = int(input("Enter the grid size:\n"))
     max_ships = size*size - 2
     print("You can place up to {} ships.".format(max_ships))
-    num_ships = int(input("Enter the number of ships (1-{}): ".format(max_ships)))
+    num_ships = int(input("Enter the number of ships (1-{}):\n ".format(max_ships)))
     while num_ships > max_ships:
         print("Too many ships! Try again.")
-        num_ships = int(input("Enter the number of ships (1-{}): ".format(max_ships)))
+        num_ships = int(input("Enter the number of ships (1-{}):\n ".format(max_ships)))
     play_game(size, num_ships)
 
 
