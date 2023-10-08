@@ -78,7 +78,7 @@ def play_game(size, num_ships):
             print_grid(grid)
 
 
-# Main function to start the game            
+# Main function to start the game
 def main():
     size = int(input("Enter the grid size: "))
     max_ships = size*size - 2
