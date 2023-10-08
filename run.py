@@ -31,4 +31,10 @@ def place_ships(grid, num_ships):
 # Function to check if a guess is within the grid boundaries
 def is_valid_guess(guess, size):
     row, col = guess
-    return row >= 0 and row < size and col >= 0 and col < size 
+    return row >= 0 and row < size and col >= 0 and col < size
+    
+
+# Function to check if a guess hits a ship
+def is_hit(guess, grid):
+    row, col = guess
+    return grid[row][col] == 's'
