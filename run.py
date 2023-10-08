@@ -63,7 +63,6 @@ def play_game(size, num_ships):
             continue
         # Add the guessed cell to the set of guessed cells
         guessed_cells.add(guess)
-               
         turns += 1  # Increment turn counter
         if is_hit(guess, grid):  # Check if the guess hits a ship
             print("Congratulations! You hit a ship!")
@@ -77,3 +76,20 @@ def play_game(size, num_ships):
             print("Sorry, you missed.")
             grid[guess_row][guess_col] = 'm'  # Mark missed cells with 'm'
             print_grid(grid)
+
+
+# Main function to start the game            
+def main():
+    size = int(input("Enter the grid size: "))
+    max_ships = size*size - 2
+    print("You can place up to {} ships.".format(max_ships))
+    num_ships = int(input("Enter the number of ships (1-{}): ".format(max_ships)))
+    while num_ships > max_ships:
+        print("Too many ships! Try again.")
+        num_ships = int(input("Enter the number of ships (1-{}): ".format(max_ships)))
+    play_game(size, num_ships)
+
+
+# This line means that main() will be called when this script is run directly.
+if __name__ == "__main__":
+    main()
