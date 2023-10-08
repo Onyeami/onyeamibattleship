@@ -32,9 +32,48 @@ def place_ships(grid, num_ships):
 def is_valid_guess(guess, size):
     row, col = guess
     return row >= 0 and row < size and col >= 0 and col < size
-    
+
 
 # Function to check if a guess hits a ship
 def is_hit(guess, grid):
     row, col = guess
     return grid[row][col] == 's'
+
+
+# Function to play the game
+def play_game(size, num_ships):
+    grid = create_grid(size)  # Create the game grid
+    place_ships(grid, num_ships)  # Place the ships
+    print("Welcome to Battleships!")  # Welcome message
+    print("Try to sink all the ships.")  # Game instructions
+    print_grid(grid)  # Print the initial game state
+    turns = 0  # Initialize turn counter
+    guessed_cells = set()  # Keep track of guessed cells
+    while True:  # Game loop
+        # Get user's guess for row
+        guess_row = int(input("Guess row (1-{}): ".format(size))) - 1
+        # Get user's guess for column
+        guess_col = ord(input("Guess column (A-{}): ".format(chr(64+size)))) - 65
+        guess = (guess_row, guess_col)  # Form the guess pair (row, column)
+        if not is_valid_guess(guess, size):  # Check if the guess is valid
+            print("Invalid guess! Try again.")
+            continue
+        if guess in guessed_cells:  # Check if the cell was already guessed
+            print("You have already guessed this cell. Try again.")
+            continue
+        # Add the guessed cell to the set of guessed cells
+        guessed_cells.add(guess)
+               
+        turns += 1  # Increment turn counter
+        if is_hit(guess, grid):  # Check if the guess hits a ship
+            print("Congratulations! You hit a ship!")
+            grid[guess_row][guess_col] = 'x'  # Mark hit cells with 'x'
+            print_grid(grid)
+            # Check if all ships are sunk
+            if all(all(cell != 's' for cell in row) for row in grid):
+                print("You sunk all the ships in {} turns!".format(turns))
+                break
+        else:
+            print("Sorry, you missed.")
+            grid[guess_row][guess_col] = 'm'  # Mark missed cells with 'm'
+            print_grid(grid)
