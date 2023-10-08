@@ -27,3 +27,8 @@ def place_ships(grid, num_ships):
             ship_col = random.randint(0, size-1)
         grid[ship_row][ship_col] = 's'  # Place the ship
 
+
+# Function to check if a guess is within the grid boundaries
+def is_valid_guess(guess, size):
+    row, col = guess
+    return row >= 0 and row < size and col >= 0 and col < size 
